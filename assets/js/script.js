@@ -73,7 +73,7 @@ var kecamatanLayer = L.geoJSON(null, {
     }
 });
 
-fetch("api/kecamatan.php")
+fetch("/api/kecamatan.php")
     .then(res => res.json())
     .then(json => {
         kecamatanLayer.addTo(map);
@@ -262,7 +262,7 @@ function loadKantorPos() {
     const loadingIndicator = document.getElementById("loadingIndicator");
     loadingIndicator.classList.remove("hidden");
 
-    fetch("api/kantorpos.php")
+    fetch("/api/kantorpos.php")
         .then(res => res.json())
         .then(json => {
             kantorLayer.clearLayers();
@@ -793,7 +793,7 @@ if (document.readyState === "loading") {
 }
 
 function updateMarker(fid, nama, lokasi, coordinates, password) {
-    fetch("api/kantorpos.php", {
+    fetch("/api/kantorpos.php", {
         method: "PUT",
         headers: {
             "Content-Type": "application/json"
@@ -897,7 +897,7 @@ if (document.readyState === "loading") {
 
 // Fungsi untuk menghapus marker
 function performDeleteMarker(fid, password) {
-    fetch("api/kantorpos.php", {
+    fetch("/api/kantorpos.php", {
         method: "DELETE",
         headers: {
             "Content-Type": "application/json"

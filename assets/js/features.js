@@ -42,7 +42,7 @@ var AVAILABLE_OFFICE_IMAGES = [
  * Load rating untuk lokasi tertentu
  */
 function loadRating(fid) {
-    fetch(`api/rating.php?fid=${fid}`)
+    fetch(`/api/rating.php?fid=${fid}`)
         .then(res => res.json())
         .then(data => {
             if (data.success) {
@@ -177,7 +177,7 @@ function submitRating(fid, rating) {
         star.style.cursor = 'wait';
     });
     
-    fetch('api/rating.php', {
+    fetch('/api/rating.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -240,7 +240,7 @@ function updatePopupRating(fid, ratingData) {
  * Load comments untuk lokasi tertentu
  */
 function loadComments(fid) {
-    fetch(`api/comments.php?fid=${fid}`)
+    fetch(`/api/comments.php?fid=${fid}`)
         .then(res => res.json())
         .then(data => {
             if (data.success) {
@@ -316,7 +316,7 @@ function submitComment(fid) {
         formData.append('rating', rating);
     }
     
-    fetch('api/comments.php', {
+    fetch('/api/comments.php', {
         method: 'POST',
         body: formData
     })
@@ -567,8 +567,8 @@ function openLocationDetail(fid) {
     
     const timestamp = new Date().getTime();
     Promise.all([
-        fetch(`api/rating.php?fid=${fid}&_t=${timestamp}`).then(r => r.json()),
-        fetch(`api/comments.php?fid=${fid}&_t=${timestamp}`).then(r => r.json())
+        fetch(`/api/rating.php?fid=${fid}&_t=${timestamp}`).then(r => r.json()),
+        fetch(`/api/comments.php?fid=${fid}&_t=${timestamp}`).then(r => r.json())
     ]).then(([ratingData, commentsData]) => {
         renderLocationDetail(feature, ratingData, commentsData);
         if (!isModalOpen) {
