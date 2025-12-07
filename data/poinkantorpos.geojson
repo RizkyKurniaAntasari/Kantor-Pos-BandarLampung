@@ -1,0 +1,231 @@
+{
+    "type": "FeatureCollection",
+    "name": "poinkantorpos",
+    "crs": {
+        "type": "name",
+        "properties": {
+            "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+        }
+    },
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "fid": 1,
+                "nama": "Kantor Pos Unila",
+                "lokasi": "Universitas Lampung",
+                "stats": {
+                    "totalComments": 1
+                },
+                "rating": {
+                    "average": 5,
+                    "count": 1
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    105.24357488853857,
+                    -5.367448138751953
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "fid": 2,
+                "nama": "Kantor Pos Labuhan Ratu",
+                "lokasi": "Labuhan Ratu"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    105.2522148745105,
+                    -5.378828205688266
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "fid": 3,
+                "nama": "Kantor Pos Way Halim",
+                "lokasi": "Way Halim"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    105.27655946336452,
+                    -5.384055855930288
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "fid": 4,
+                "nama": "Kantor Pos Kemiling",
+                "lokasi": "Kemiling"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    105.21020852511533,
+                    -5.389996313001207
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "fid": 5,
+                "nama": "Kantor Pos Tanjungkarang Barat",
+                "lokasi": "Tanjung Karang Barat"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    105.2426679769207,
+                    -5.398550469076652
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "fid": 6,
+                "nama": "Plaza Pos Indonesia Bandar Lampung",
+                "lokasi": "Kota Raja",
+                "rating": {
+                    "average": 2.6,
+                    "count": 5
+                },
+                "stats": {
+                    "totalImages": 0,
+                    "totalComments": 2
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    105.25818168550414,
+                    -5.409718213396141
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "fid": 7,
+                "nama": "Kantor Pos Pahoman",
+                "lokasi": "Pahoman"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    105.27178601456961,
+                    -5.425400229693741
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "fid": 8,
+                "nama": "Kantor Pos Teluk Betung Selatan",
+                "lokasi": "Teluk Betung Selatan",
+                "rating": {
+                    "average": 2.67,
+                    "count": 3
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    105.26868327285293,
+                    -5.44298261164144
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "fid": 9,
+                "nama": "Kantor Pos Sukaraja",
+                "lokasi": "Sukaraja"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    105.2865837058338,
+                    -5.44274501530837
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "fid": 10,
+                "nama": "Kantor Pos Perwata",
+                "lokasi": "Teluk Betung Barat 2",
+                "stats": {
+                    "totalImages": 0,
+                    "totalComments": 1
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    105.25579496110669,
+                    -5.452011202694825
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "fid": 11,
+                "nama": "Kantor Pos Panjang",
+                "lokasi": "Panjang"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    105.32444901514569,
+                    -5.479679129587556
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "fid": 12,
+                "nama": "Kantor Pos Hanura",
+                "lokasi": "Pesawaran"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    105.23703541888953,
+                    -5.532001387477581
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "fid": 13,
+                "nama": "Kantor Pos Sukabumi",
+                "lokasi": "Bukit mas",
+                "id": 13
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    105.31039237976074,
+                    -5.401033202770929
+                ]
+            }
+        }
+    ]
+}
