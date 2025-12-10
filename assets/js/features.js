@@ -6,35 +6,35 @@
 var currentLocationFid = null;
 var currentRating = { average: 0, count: 0 };
 var OFFICE_IMAGE_MAP = {
-    1: "assets/images/1.png",
-    2: "assets/images/2.png",
-    3: "assets/images/3.png",
-    4: "assets/images/4.png",
-    5: "assets/images/5.png",
-    6: "assets/images/6.png",
-    7: "assets/images/7.png",
-    8: "assets/images/8.png",
-    9: "assets/images/9.png",
-    10: "assets/images/10.png",
-    11: "assets/images/11.png",
-    12: "assets/images/12.png",
-    13: "assets/images/13.png"
+    1: "/assets/images/1.png",
+    2: "/assets/images/2.png",
+    3: "/assets/images/3.png",
+    4: "/assets/images/4.png",
+    5: "/assets/images/5.png",
+    6: "/assets/images/6.png",
+    7: "/assets/images/7.png",
+    8: "/assets/images/8.png",
+    9: "/assets/images/9.png",
+    10: "/assets/images/10.png",
+    11: "/assets/images/11.png",
+    12: "/assets/images/12.png",
+    13: "/assets/images/13.png"
 };
 // Array untuk menyimpan semua image yang tersedia (1-13)
 var AVAILABLE_OFFICE_IMAGES = [
-    "assets/images/1.png",
-    "assets/images/2.png",
-    "assets/images/3.png",
-    "assets/images/4.png",
-    "assets/images/5.png",
-    "assets/images/6.png",
-    "assets/images/7.png",
-    "assets/images/8.png",
-    "assets/images/9.png",
-    "assets/images/10.png",
-    "assets/images/11.png",
-    "assets/images/12.png",
-    "assets/images/13.png"
+    "/assets/images/1.png",
+    "/assets/images/2.png",
+    "/assets/images/3.png",
+    "/assets/images/4.png",
+    "/assets/images/5.png",
+    "/assets/images/6.png",
+    "/assets/images/7.png",
+    "/assets/images/8.png",
+    "/assets/images/9.png",
+    "/assets/images/10.png",
+    "/assets/images/11.png",
+    "/assets/images/12.png",
+    "/assets/images/13.png"
 ];
 
 
@@ -42,7 +42,7 @@ var AVAILABLE_OFFICE_IMAGES = [
  * Load rating untuk lokasi tertentu
  */
 function loadRating(fid) {
-    fetch(`/api/rating.php?fid=${fid}`)
+    fetch(`api/rating.php?fid=${fid}`)
         .then(res => res.json())
         .then(data => {
             if (data.success) {
@@ -177,7 +177,7 @@ function submitRating(fid, rating) {
         star.style.cursor = 'wait';
     });
     
-    fetch('/api/rating.php', {
+    fetch('api/rating.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -240,7 +240,7 @@ function updatePopupRating(fid, ratingData) {
  * Load comments untuk lokasi tertentu
  */
 function loadComments(fid) {
-    fetch(`/api/comments.php?fid=${fid}`)
+    fetch(`api/comments.php?fid=${fid}`)
         .then(res => res.json())
         .then(data => {
             if (data.success) {
@@ -316,7 +316,7 @@ function submitComment(fid) {
         formData.append('rating', rating);
     }
     
-    fetch('/api/comments.php', {
+    fetch('api/comments.php', {
         method: 'POST',
         body: formData
     })
@@ -567,9 +567,39 @@ function openLocationDetail(fid) {
     
     const timestamp = new Date().getTime();
     Promise.all([
-        fetch(`/api/rating.php?fid=${fid}&_t=${timestamp}`).then(r => r.json()),
-        fetch(`/api/comments.php?fid=${fid}&_t=${timestamp}`).then(r => r.json())
+        fetch(`api/rating.php?fid=${fid}&_t=${timestamp}`)
+            .then(r => {
+                if (!r.ok) {
+                    throw new Error(`HTTP error! status: ${r.status}`);
+                }
+                return r.json();
+            })
+            .catch(err => {
+                console.error("Error loading rating:", err);
+                return { success: false, error: true, data: { average: 0, count: 0, distribution: { '1': 0, '2': 0, '3': 0, '4': 0, '5': 0 }, ratings: [] } };
+            }),
+        fetch(`api/comments.php?fid=${fid}&_t=${timestamp}`)
+            .then(r => {
+                if (!r.ok) {
+                    throw new Error(`HTTP error! status: ${r.status}`);
+                }
+                return r.json();
+            })
+            .catch(err => {
+                console.error("Error loading comments:", err);
+                return { success: false, error: true, data: [] };
+            })
     ]).then(([ratingData, commentsData]) => {
+        // Handle error responses
+        if (ratingData.error || !ratingData.success) {
+            console.warn("Rating data error:", ratingData);
+            ratingData = { success: true, data: { average: 0, count: 0, distribution: { '1': 0, '2': 0, '3': 0, '4': 0, '5': 0 }, ratings: [] } };
+        }
+        if (commentsData.error || !commentsData.success) {
+            console.warn("Comments data error:", commentsData);
+            commentsData = { success: true, data: [] };
+        }
+        
         renderLocationDetail(feature, ratingData, commentsData);
         if (!isModalOpen) {
             modal.classList.add('active');

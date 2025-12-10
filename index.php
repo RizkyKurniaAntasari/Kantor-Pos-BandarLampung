@@ -1124,8 +1124,8 @@
         </div>
     </div>
 
-    <script src="/assets/js/script.js"></script>
-    <script src="/assets/js/features.js"></script>
+    <script src="assets/js/script.js"></script>
+    <script src="assets/js/features.js"></script>
 </body>
 
 </html>

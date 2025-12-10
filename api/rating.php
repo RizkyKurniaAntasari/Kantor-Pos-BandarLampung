@@ -4,26 +4,14 @@
  * Menggunakan Supabase REST API (PostgREST) via HTTPS
  */
 
-// 1. Matikan error HTML agar response tetap JSON walau ada error
-ini_set('display_errors', 0);
-ini_set('display_startup_errors', 0);
-error_reporting(E_ALL);
-
-// 2. Gunakan Absolute Path agar aman di Vercel
 require_once __DIR__ . '/../config/supabase-rest.php';
 
 header('Content-Type: application/json; charset=utf-8');
 header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Methods: GET, POST, OPTIONS'); // Tambahkan OPTIONS untuk preflight
+header('Access-Control-Allow-Methods: GET, POST');
 header('Access-Control-Allow-Headers: Content-Type');
 
 $method = $_SERVER['REQUEST_METHOD'];
-
-// Handle Preflight Request (CORS)
-if ($method === 'OPTIONS') {
-    http_response_code(200);
-    exit;
-}
 
 switch ($method) {
     case 'GET':
@@ -154,7 +142,6 @@ function submitRating() {
         
         $supabase = getSupabaseRest();
         
-        // Cek apakah user ini sudah pernah rating lokasi ini?
         $existing = $supabase->get('ratings', [
             'select' => 'id',
             'fid' => 'eq.' . $fid,
@@ -168,19 +155,15 @@ function submitRating() {
             'source' => $source
         ];
         
-        // --- PERBAIKAN LOGIKA IF-ELSE DISINI ---
         if (!empty($existing)) {
-            // Jika sudah ada, UPDATE (Patch)
             $supabase->patch('ratings', $data, [
                 'fid' => 'eq.' . $fid,
                 'user_id' => 'eq.' . $userId
             ]);
         } else {
-            // Jika belum ada, INSERT (Post)
             $supabase->post('ratings', $data);
         }
         
-        // Ambil data terbaru untuk menghitung rata-rata baru
         $ratings = $supabase->get('ratings', [
             'select' => 'rating',
             'fid' => 'eq.' . $fid
@@ -211,7 +194,6 @@ function submitRating() {
         ]);
         
     } catch (Exception $e) {
-        // --- CATCH INI SEKARANG SUDAH PUNYA PASANGAN TRY ---
         http_response_code(500);
         echo json_encode([
             'error' => true,
@@ -219,4 +201,3 @@ function submitRating() {
         ]);
     }
 }
-?>
